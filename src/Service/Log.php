@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Service;
+use App\Service\Transform;
 
-class log
+
+class Log
 {
 public function logger(string $message){
     $message .= "\n";

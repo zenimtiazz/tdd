@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Service;
-namespace App\Service\transform;
+use App\Service\Transform;
 
 
-class change implements transform
+class Change implements Transform
 {
 
     public function transform(string $string): string

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Service;
-namespace App\Service\transform;
+use App\Service\Transform;
 
 
-class Capitalize implements transform
+class Capitalize implements Transform
 {
 
     public function transform(string $string): string

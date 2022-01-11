@@ -3,7 +3,7 @@
 namespace App\Service;
 
 
-interface transform
+interface Transform
 {
     public function transform(string $string):string;
 

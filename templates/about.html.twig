@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Challenge Twig{% endblock %}
+{% block title %}Dependency Injection{% endblock %}
 
 {% block body %}
     {% if message %}
         <p>Message: {{ message }}</p>
     {% endif %}
-    <form action="{{ path('about') }}" method="post">
+
+    <form action="{{ path('master') }}" method="post">
         <input type="text" name="message" placeholder="message">
         <select name="classNames" id="classNames">
             <option value="Capitalize">Capitalize</option>
