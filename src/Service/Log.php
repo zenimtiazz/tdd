@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-
-
 class Log
 {
 public function logger(string $message){

@@ -9,25 +9,40 @@ use Symfony\Component\HttpFoundation\Request;
 
 
 use App\Service\Master;
+use App\Service\Capitalize;
+use App\Service\Log;
+use App\Service\Change;
+
 
 class IndexController extends AbstractController
 {
     /**
      * @Route("/master", name="master")
-     * @param Master $master
+
      * @return Response
      */
-    public function index(Master $master): Response
+    public function index(Request $request): Response
     {
+        $capitalize = new Capitalize();
+        $change= new Change();
+        $log = new Log();
         $message = "";
+        // Request::createFromGlobals(); method initializes a new Request Obj.
         $request = Request::createFromGlobals();
         if ($request->isMethod('POST')) {
             if ($request->request->get('message')) {
                 $message = $request->request->get('message');
                 $className = $request->request->get('classNames');
-                $master->setMessage($message);
-                $message = $master->transform($message, $className);
-                $master->log();
+                if($className === 'Capitalize'){
+                    $master = new Master($capitalize,$log);
+                 $message=  $master->transform($message);
+
+                }
+
+               elseif($className === 'Change'){
+                    $master = new Master($change,$log);
+                 $message= $master->transform($message);
+                }
             }
         }
         return $this->render('/about.html.twig', [

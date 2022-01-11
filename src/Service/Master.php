@@ -4,31 +4,24 @@ namespace App\Service;
 use App\Service\Capitalize;
 use App\Service\Change;
 use App\Service\Log;
+use App\Service\Transform;
 
 
 
 class Master
 {
-private Capitalize $capitalize;
-private Change $change;
+private Transform $transform;
 private Log $log;
 private string $message;
 
-public function __construct(Capitalize $capitalize,Change $change,Log $log)
+public function __construct(Transform $transform,Log $log)
 {
-    $this->capitalize = $capitalize;
-    $this->change = $change;
+    $this->transform = $transform;
     $this->log = $log;
 }
-public function transform(String $message, String $className): string
+public function transform(String $message): string
 {
-    if($className === 'Capitalize'){
-        $this->message = $this->capitalize->transform($this->message);
-    }
-    elseif ($className === 'Change'){
-        $this->message = $this->change->transform($this->change);
-    }
-   return $this->message;
+  return $this->transform->transform($message);
 }
 
     /**
