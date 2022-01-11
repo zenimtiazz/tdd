@@ -23,6 +23,11 @@ public function transform(String $message): string
 {
   return $this->transform->transform($message);
 }
+    public function log($message)
+    {
+        $this->log->logger($message);
+    }
+
 
     /**
      * @param string $message
@@ -32,8 +37,4 @@ public function transform(String $message): string
         $this->message = $message;
     }
 
-    public function log()
-    {
-       $this->log->logger($this->message);
-    }
 }

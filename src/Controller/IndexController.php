@@ -36,13 +36,17 @@ class IndexController extends AbstractController
                 if($className === 'Capitalize'){
                     $master = new Master($capitalize,$log);
                  $message=  $master->transform($message);
+                 $master->log($message);
+
 
                 }
 
                elseif($className === 'Change'){
                     $master = new Master($change,$log);
                  $message= $master->transform($message);
-                }
+                   $master->log($message);
+
+               }
             }
         }
         return $this->render('/about.html.twig', [
