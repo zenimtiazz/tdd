@@ -34,6 +34,6 @@ public function transform(String $message): string
 
     public function log()
     {
-        return $this->log->logger($this->message);
+       $this->log->logger($this->message);
     }
 }
