@@ -14,10 +14,10 @@ class IndexController extends AbstractController
 {
     /**
      * @Route("/master", name="master")
-     * @param Master $transform
+     * @param Master $master
      * @return Response
      */
-    public function index(Master $transform): Response
+    public function index(Master $master): Response
     {
         $message = "";
         $request = Request::createFromGlobals();
@@ -25,9 +25,9 @@ class IndexController extends AbstractController
             if ($request->request->get('message')) {
                 $message = $request->request->get('message');
                 $className = $request->request->get('classNames');
-                $transform->setMessage($message);
-                $message = $transform->transform($message, $className);
-                $transform->log();
+                $master->setMessage($message);
+                $message = $master->transform($message, $className);
+                $master->log();
             }
         }
         return $this->render('/about.html.twig', [

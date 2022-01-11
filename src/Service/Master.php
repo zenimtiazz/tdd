@@ -22,10 +22,10 @@ public function __construct(Capitalize $capitalize,Change $change,Log $log)
 }
 public function transform(String $message, String $className): string
 {
-    if($className === 'capitalize'){
+    if($className === 'Capitalize'){
         $this->message = $this->capitalize->transform($this->message);
     }
-    elseif ($className === 'change'){
+    elseif ($className === 'Change'){
         $this->message = $this->change->transform($this->change);
     }
    return $this->message;
