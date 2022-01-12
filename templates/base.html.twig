@@ -24,10 +24,19 @@
                         <a class="nav-item nav-link" href="{{ path('master') }}">Capitalization</a>
 
                     {% endblock %}
+
                 </nav>
 
             </div>
+            <div class = "text-center">
+                {% block footer %}
+                    &copy;Becode
+                {% endblock %}
+            </div>
+
         </header>
+
         {% block body %}{% endblock %}
+
     </body>
 </html>

@@ -47,6 +47,25 @@ class LearningController extends AbstractController
         ]);
     }
     /**
+     * @Route("/date", name="aboutMe")
+     * @param SessionInterface $session
+     * @return Response
+     */
+    public function aboutMe(SessionInterface $session): Response
+    {
+        if ($session->get('name')) {
+            $name = $session->get('name');
+            $date = new DateTime();
+            $response = $this->render('index.html.twig', [
+                'name' => $name,
+                'date' => $date
+            ]);
+        } else {
+            $response = $this->forward('App\Controller\LearningController::showMyName');
+        }
+        return $response;
+    }
+    /**
      * @Route("/changeMyName", name="changeMyName", methods={"POST"})
      * @param Request $request
      * @param SessionInterface $session
