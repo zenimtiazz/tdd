@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use \Datetime;
+
 
 class LearningController extends AbstractController
 {
@@ -46,8 +48,9 @@ class LearningController extends AbstractController
             'name' => $name
         ]);
     }
+    //Date and Time
     /**
-     * @Route("/date", name="aboutMe")
+     * @Route("/date", name="date")
      * @param SessionInterface $session
      * @return Response
      */
@@ -56,7 +59,7 @@ class LearningController extends AbstractController
         if ($session->get('name')) {
             $name = $session->get('name');
             $date = new DateTime();
-            $response = $this->render('index.html.twig', [
+            $response = $this->render('learning/index.html.twig', [
                 'name' => $name,
                 'date' => $date
             ]);
