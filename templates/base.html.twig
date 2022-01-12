@@ -14,29 +14,34 @@
         {% endblock %}
     </head>
     <body>
+    <div class="bg-image"></div>
+    <div class = "bg-text">
     <div class="d-flex">
         <header class="row flex-column d-flex pt-5">
             <div class="col-1">
                 <nav class="navbar nav-pills flex-column sidenav">
                     {% block menu %}
-                    <a class="nav-item nav-link active" href="{{ path('showMyName') }}">Home</a> &nbsp;&nbsp;
-                        <a class="nav-item nav-link" href="{{ path('about') }}">About</a>
-                        <a class="nav-item nav-link" href="{{ path('master') }}">Capitalization</a>
-                        <a class="nav-item nav-link" href="{{ path('date') }}">DateTime</a>
+                    <h4><a class="nav-item nav-link active" href="{{ path('showMyName') }}">Home</a></h4>
+                       <h4> <a class="nav-item nav-link" href="{{ path('about') }}">About</a> </h4>
+                       <h4> <a class="nav-item nav-link" href="{{ path('master') }}">Capitalization</a> </h4>
+                       <h4> <a class="nav-item nav-link" href="{{ path('date') }}">DateTime</a> </h4>
 
                     {% endblock %}
 
                 </nav>
 
             </div>
-            <div>
-                {{ quoteGenerator() }}
+
+            <div class ="text-center">
+                <br>
+                <p> &nbsp;&nbsp;&nbsp; {{ quoteGenerator() }}</p>
             </div>
             <div class = "text-center">
                 {% block footer %}
                     &copy;Becode
                 {% endblock %}
             </div>
+
 
         </header>
 

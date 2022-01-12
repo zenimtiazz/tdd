@@ -1,16 +1,34 @@
+
 body {
     font-family: "spartan";
     color: #444;
-    background-image: url("/images/img.png") ;
+    /* Add the blur effect */
+}
+.bg-image{
+    background-image:  url("/images/img.png");
+    filter: blur(6px);
+    -webkit-filter: blur(6px);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-sze: cover;
     height: 800px;
-    background-color: rgba(0,0,0,3.63);
-
 }
-background-image {
+/*background-image {
     opacity: 0.5;
-}
+}*/
 .container{
 color: #0c0c0c;
+}
+.bg-text{
+    color: Black;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    height: 70%;
+    padding: 20px;
+    text-align: center;
 }
