@@ -11,7 +11,7 @@
 {% block body %}
 
 <div class="container">
-    <h1 class="m-3">Hello {{ name }}!</h1>
+    <h1 class="m-3">Hello {{ name|title }}!</h1>
     <form method="post" action="{{ path('changeMyName') }}" class="m-3">
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" value=""><br><br>
