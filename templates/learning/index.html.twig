@@ -13,11 +13,11 @@
      <br>
      <br><br>
          <br>
-   <p>Europe: {{ date|format_date(pattern="d/M/Y") }}</p>
+   <p>Europe: {{ date('now')|format_date(pattern="d/M/Y") }}</p>
 
-   <p>America: {{ date|format_date(pattern="M/d/Y") }}</p>
+   <p>America: {{ date('now')|format_date(pattern="M/d/Y") }}</p>
 
-   <p>China & Japan: {{ date|format_date(pattern="Y/M/d") }}</p>
+   <p>China & Japan: {{ date('now')|format_date(pattern="Y/M/d") }}</p>
 
 
      </div>
