@@ -1,15 +1,16 @@
 
 body {
-    font-family: "spartan";
-    color: #444;
+    font-family: "serif";
+    color: #fffdfd;
+    font-size: 20px;
     /* Add the blur effect */
 }
-.bg-image{
-    background-image:  url("/images/img.png");
+.bg{
+    background-image:  url("public/images/rec.jpg")!important;
     filter: blur(6px);
     -webkit-filter: blur(6px);
     background-repeat: no-repeat;
-    background-sze: cover;
+    background-size: cover;
     height: 800px;
 }
 /*background-image {

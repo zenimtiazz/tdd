@@ -6,6 +6,11 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+            <link rel="stylesheet" href="{{ asset('CS/app.css') }}">
+
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
@@ -14,38 +19,44 @@
         {% endblock %}
     </head>
     <body>
-    <div class="bg-image"></div>
-    <div class = "bg-text">
-    <div class="d-flex">
-        <header class="row flex-column d-flex pt-5">
-            <div class="col-1">
-                <nav class="navbar nav-pills flex-column sidenav">
-                    {% block menu %}
-                    <h4><a class="nav-item nav-link active" href="{{ path('showMyName') }}">Home</a></h4>
-                       <h4> <a class="nav-item nav-link" href="{{ path('about') }}">About</a> </h4>
-                       <h4> <a class="nav-item nav-link" href="{{ path('master') }}">Capitalization</a> </h4>
-                       <h4> <a class="nav-item nav-link" href="{{ path('date') }}">DateTime</a> </h4>
 
-                    {% endblock %}
 
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <style>.navbar,.navbar-brand,.nav-link{
+                            padding: 1rem;
+                            font-family: Serif;
+                            font-size: 30px;
+                            color: #DDDDDD;
+                        }
+                    </style>
+                    <a class="navbar-brand" href="{{ path('home') }}">✈Bookings️</a>
+                    &nbsp;&nbsp;&nbsp; <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ path('home') }}">Stays <span class="sr-only">(current)</span></a>
+                            </li>
+                            &nbsp;&nbsp;&nbsp;
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('book') }}">Login</a>
+                            </li>
+                            &nbsp;&nbsp;&nbsp;
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('new_room') }}">Book a room</a>
+                            </li>
+                        </ul>
+
+                    </div>
                 </nav>
-
-            </div>
-
-            <div class ="text-center">
-                <br>
-                <p> &nbsp;&nbsp;&nbsp; {{ quoteGenerator() }}</p>
-            </div>
-            <div class = "text-center">
-                {% block footer %}
-                    &copy;Becode
-                {% endblock %}
             </div>
 
 
         </header>
 
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% endblock %}
 
     </body>
 </html>
