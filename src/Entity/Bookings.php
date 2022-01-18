@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\BookingsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
+
 
 #[ORM\Entity(repositoryClass: BookingsRepository::class)]
 class Bookings
@@ -17,19 +19,19 @@ class Bookings
     private int $id;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'booking')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $username;
+    #[ORM\JoinColumn(nullable: true)]
+    private $user;
 
     #[ORM\OneToMany(mappedBy: 'booking', targetEntity: Room::class)]
     private $room;
 
-    #[ORM\Column(type: 'datetime')]
-    private string $Startdate;
+    #[ORM\Column(type:'datetime',nullable: false)]
+    private $Startdate;
 
-    #[ORM\Column(type: 'datetime')]
-    private string $Enddate;
+    #[ORM\Column(type: 'datetime',nullable: false)]
+    private $Enddate;
 
-    #[Pure] public function __construct()
+    public function __construct()
     {
         $this->room = new ArrayCollection();
     }
@@ -39,16 +41,20 @@ class Bookings
         return $this->id;
     }
 
-    public function getUsername(): string
+    public function getUser(): ?User
     {
-        return $this->username;
+        return $this->user;
     }
 
-    public function setUsername(string $username): self
+
+    public function setUser(?User $user): self
     {
-        $this->username = $username;
+        $this->user = $user;
 
         return $this;
+    }
+    public function __toString() {
+        return $this->user();
     }
 
     /**
@@ -81,24 +87,24 @@ class Bookings
         return $this;
     }
 
-    public function getStartdate(): ?string
+    public function getStartdate(): ?\DateTimeInterface
     {
         return $this->Startdate;
     }
 
-    public function setStartdate(string $Startdate): self
+    public function setStartdate(DateTimeInterface $Startdate): self
     {
         $this->Startdate = $Startdate;
 
         return $this;
     }
 
-    public function getEnddate(): ?string
+    public function getEnddate(): ?DateTimeInterface
     {
         return $this->Enddate;
     }
 
-    public function setEnddate(string $Enddate): self
+    public function setEnddate(DateTimeInterface $Enddate): self
     {
         $this->Enddate = $Enddate;
 

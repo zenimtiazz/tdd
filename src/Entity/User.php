@@ -6,7 +6,6 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -14,7 +13,7 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $username;
@@ -31,12 +30,12 @@ class User
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $premiumMember;
 
-    #[ORM\OneToMany(mappedBy: 'username', targetEntity: Bookings::class)]
-    private username $booking;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Bookings::class)]
+    private $bookings;
 
-    #[Pure] public function __construct()
+    public function __construct()
     {
-        $this->booking = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,15 +106,15 @@ class User
     /**
      * @return Collection|Bookings[]
      */
-    public function getBooking(): Collection
+    public function getBookings(): Collection
     {
-        return $this->booking;
+        return $this->bookings;
     }
 
-    public function addBooking(Bookings $booking): self
+    public function addBookings(Bookings $booking): self
     {
-        if (!$this->booking->contains($booking)) {
-            $this->booking[] = $booking;
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
             $booking->setUsername($this);
         }
 
@@ -124,7 +123,7 @@ class User
 
     public function removeBooking(Bookings $booking): self
     {
-        if ($this->booking->removeElement($booking)) {
+        if ($this->bookings->removeElement($booking)) {
             // set the owning side to null (unless already changed)
             if ($booking->getUsername() === $this) {
                 $booking->setUsername(null);

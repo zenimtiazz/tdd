@@ -17,8 +17,8 @@ class Room
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    #[ORM\Column(type: 'bool', options: ['default' => false])]
-    private bool $onlyForPremiumMembers;
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private $onlyForPremiumMembers;
 
     #[ORM\ManyToOne(targetEntity: Bookings::class, inversedBy: 'room')]
     #[ORM\JoinColumn(nullable: false)]
@@ -46,7 +46,7 @@ class Room
         return $this->onlyForPremiumMembers;
     }
 
-    public function setOnlyForPremiumMembers(bool $onlyForPremiumMembers): self
+    public function setOnlyForPremiumMembers(?bool $onlyForPremiumMembers): self
     {
         $this->onlyForPremiumMembers = $onlyForPremiumMembers;
 

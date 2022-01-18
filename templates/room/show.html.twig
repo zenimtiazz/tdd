@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+ <h1>{{ booking.startdate|date('y-m-d') }}</h1>
+<p>{{ booking.enddate|date('y-m-d') }}</p>
+<hr>
+<a href="{{ path('booking_list') }}">Go Back</a>
+{% endblock %}
