@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\RoomRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
 use phpDocumentor\Reflection\Types\Boolean;
 
 #[ORM\Entity(repositoryClass: RoomRepository::class)]
@@ -22,8 +25,12 @@ class Room
 
     #[ORM\ManyToOne(targetEntity: Bookings::class, inversedBy: 'room')]
     #[ORM\JoinColumn(nullable: false)]
-    private int $booking;
-
+    private  $booking;
+    public function __construct(bool $isPremium)
+    {
+        $this->booking = new ArrayCollection();
+        $this->onlyForPremiumMembers = $isPremium;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -64,4 +71,9 @@ class Room
 
         return $this;
     }
+
+    function canBook(User $user) {
+        return ($this->getOnlyForPremiumMembers() && $user->getPremiumMember()) || !$this->getOnlyForPremiumMembers();
+    }
+
 }

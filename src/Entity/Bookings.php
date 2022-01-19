@@ -110,4 +110,8 @@ class Bookings
 
         return $this;
     }
+    function canBook($Startdate,$Enddate) {
+        return ($this->getStartdate() && $user->getPremiumMember()) || !$this->getOnlyForPremiumMembers();
+    }
+
 }
