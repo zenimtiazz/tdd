@@ -7,6 +7,7 @@ use App\Entity\User;
 use phpDocumentor\Reflection\Types\Integer;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -114,10 +115,9 @@ class RoomController extends AbstractController
             ->add('Enddate',DateType::class,
             array('attr'=>array('class'=>'form-control p-10','required'=>true)
             ))
-//            ->add('user',TextType::class,
-//                array('attr'=>array('class'=>'form-control p-10')
+//          ->add('user',EntityType::class,array('attr'=>array('class'=>'form-control p-10')
 //
-//                ))
+//               ))
 
             ->add('save',SubmitType::class,array(
                 'label' => 'Create',
@@ -127,12 +127,14 @@ class RoomController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted()&& $form->isValid()){
             $booking =$form->getData();
-
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($booking);
-
-            $entityManager->flush();
-            return $this->redirectToRoute('booking_list');
+     var_dump($booking);
+            return $this->render('room/new.html.twig',array(
+            ));
+//            $entityManager = $doctrine->getManager();
+//            $entityManager->persist($booking);
+//
+//            $entityManager->flush();
+//            return $this->redirectToRoute('booking_list');
         }
         return $this->render('room/new.html.twig',array(
             'form' => $form->createView()

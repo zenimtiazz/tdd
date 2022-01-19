@@ -129,5 +129,9 @@ class Bookings
            }
 
     }
+    public function checkAvailability(DateTime $startdate, DateTime $enddate)
+    {
+        return ($this->getStartdate()>=$startdate->getEndDate() && $this->getStartDate()<=$enddate->getStartDate());
+    }
 
 }
