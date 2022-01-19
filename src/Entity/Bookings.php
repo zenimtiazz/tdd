@@ -110,8 +110,24 @@ class Bookings
 
         return $this;
     }
-    function canBook($Startdate,$Enddate) {
-        return ($this->getStartdate() && $user->getPremiumMember()) || !$this->getOnlyForPremiumMembers();
+    public function canBook(DateTime $Startdate, DateTime $Enddate) {
+
+        $time_diff = $Startdate->diff($Enddate);
+        $time_diff->h . ' hours';
+        $time_diff->i . ' minutes';
+        $time_diff->s . ' seconds';
+
+        if($time_diff->i >0 && $time_diff->h==4){
+            return false;
+        }
+        elseif ($time_diff->h == 4 ||  $time_diff->h < 4 ) {
+            return true;
+        }
+
+           else {
+               return false;
+           }
+
     }
 
 }
