@@ -133,4 +133,8 @@ class User
 
         return $this;
     }
+    function canAfford(User $user, int $hour): bool
+    {
+        return ($user->getCredit() > $hour * 2);
+    }
 }

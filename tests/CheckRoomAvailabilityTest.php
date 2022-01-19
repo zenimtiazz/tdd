@@ -52,9 +52,29 @@ class CheckRoomAvailabilityTest extends TestCase
     public function testBookings(DateTime $Startdate, DateTime $Enddate,bool $expectedOutput): void
     {
         $bookings = new Bookings();
-
-
         $this->assertEquals($expectedOutput, $bookings->canBook($Startdate, $Enddate));
+
+    }
+    private function dataProviderCanAfford(): array
+    {
+        return [
+            [new User(), 100 , 3 , true],
+            [new User(),50,4, false],
+            [new User(),150,3, true],
+            [new User(),20,5,false]
+
+
+        ];
+    }
+    /**
+     * function has to start with Test
+     * @dataProvider dataProviderCanAfford
+     */
+    public function canAfford(User $user, int $credit, int $bookings, bool $expectedOutput): void
+    {
+        $user = new User();
+        $user->setCredit();
+        $this->assertEquals($expectedOutput, $user->canAfford($user, $bookings));
 
     }
 }
