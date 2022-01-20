@@ -75,38 +75,25 @@ class CheckRoomAvailabilityTest extends TestCase
         $this->assertEquals($expectedOutput, $user->canAfford($user, $bookings));
 
     }
-    function dataProviderForIsAvailable(): array
+    public function dataProviderForTestSameBooming()
     {
         return [
-            [new DateTime("2018-01-10 12:00:45"), new DateTime("2018-01-10 14:00:45"), [
-                ['Startdate' => new DateTime("2018-01-10 02:00:45"), 'Enddate' => new DateTime("2018-01-10 06:00:45")],
-                ['Startdate' => new DateTime("2018-01-10 12:00:45"), 'Enddate' => new DateTime("2018-01-10 13:00:45")],
-                ['Startdate' => new DateTime("2018-01-10 14:00:45"), 'Enddate' => new DateTime("2018-01-10 16:00:45")],
-            ], false],
-            [new DateTime("2018-01-10 12:00:45"), new DateTime("2018-01-10 14:00:45"), [
-                ['Startdate' => new DateTime("2018-01-10 08:00:45"), 'Enddate' => new DateTime("2018-01-10 12:00:45")],
-                ['Startdate' => new DateTime("2018-01-10 08:00:45"), 'Enddate' => new DateTime("2018-01-10 10:00:45")],
-                ['Startdate' => new DateTime("2018-01-10 14:00:45"), 'Enddate' => new DateTime("2018-01-10 19:00:45")],
-            ], true],
-            [new DateTime("2018-01-10 15:00:45"), new DateTime("2018-01-10 19:00:45"), [
-                ['Startdate' => new DateTime("2018-01-10 12:00:45"), 'Enddate' => new DateTime("2018-01-10 15:00:45")],
-                ['Startdate' => new DateTime("2018-01-10 11:00:45"), 'Enddate' => new DateTime("2018-01-10 12:00:45")],
-                ['Startdate' => new DateTime("2018-01-10 11:00:45"), 'Enddate' => new DateTime("2018-01-10 14:00:45")],
-            ], true],
-            [new DateTime("2018-01-10 10:00:45"), new DateTime("2018-01-10 14:00:45"), [
-                ['Startdate' => new DateTime("2018-01-10 02:00:45"), 'Enddate' => new DateTime("2018-01-10 02:00:45")],
-                ['Startdate' => new DateTime("2018-01-10 02:00:45"), 'Enddate' => new DateTime("2018-01-10 02:00:45")],
-                ['Startdate' => new DateTime("2018-01-10 12:00:45"), 'Enddate' => new DateTime("2018-01-10 13:00:45")],
-            ], false],
+            [new DateTime('2020-12-12 10:05:05'), new DateTime('2020-12-12 14:05:05'), new DateTime('2020-12-12 11:05:05'), new DateTime('2020-12-12 15:05:05'), false],
+            [new DateTime('2020-12-12 10:05:05'), new DateTime('2020-12-12 14:05:05'), new DateTime('2020-12-12 09:05:05'), new DateTime('2020-12-12 13:05:05'), false],
+            [new DateTime('2020-12-12 10:05:05'), new DateTime('2020-12-12 14:05:05'), new DateTime('2020-12-12 14:05:05'), new DateTime('2020-12-12 18:05:05'), true],
+            [new DateTime('2020-12-12 06:05:05'), new DateTime('2020-12-12 10:05:05'), new DateTime('2020-12-12 10:05:05'), new DateTime('2020-12-12 14:05:05'), true],
+            [new DateTime('2020-12-12 10:05:05'), new DateTime('2020-12-12 14:05:05'), new DateTime('2020-12-12 10:05:05'), new DateTime('2020-12-12 14:05:05'), false],
         ];
     }
 
     /**
      * function has to start with Test
-     * @dataProvider dataProviderForIsAvailable
+     * @dataProvider dataProviderForTestSameBooming
      */
-    public function testIsAvailable(DateTime $Startdate, DateTime $Enddate, bool $expectedOutput): void
+    public function testSameBooming(DateTime $start1, DateTime $end1, DateTime $start2, DateTime $end2, bool $expectedOutput)
     {
         $booking = new Bookings();
-        $this->assertEquals($expectedOutput, $booking->checkAvailability($Startdate, $Enddate));
-    }}
+        $this->assertEquals($expectedOutput, $booking->checkSameBooking($start1, $end1, $start2, $end2));
+
+    }
+}

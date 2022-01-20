@@ -129,9 +129,23 @@ class Bookings
            }
 
     }
-    public function checkAvailability(DateTime $startdate, DateTime $enddate)
+    public  function checkSameBooking(DateTime $start1, DateTime $end1, DateTime $start2, DateTime $end2)
     {
-        return ($this->getStartdate()>=$startdate->getEndDate() && $this->getStartDate()<=$enddate->getStartDate());
+
+        $startTime1 = $start1->gettimestamp();
+        $startTime2 = $start2->gettimestamp();
+        $endTime1 = $end1->gettimestamp();
+        $endTime2 = $end2->gettimestamp();
+
+        if($startTime2 > $startTime1 && $startTime2 < $endTime1){
+            return false;
+        }elseif($endTime2 < $endTime1 && $endTime2 > $startTime1){
+            return false;
+        }elseif($startTime2 == $startTime1 && $endTime2 == $endTime1){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }

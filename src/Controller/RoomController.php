@@ -130,11 +130,11 @@ class RoomController extends AbstractController
      var_dump($booking);
             return $this->render('room/new.html.twig',array(
             ));
-//            $entityManager = $doctrine->getManager();
-//            $entityManager->persist($booking);
-//
-//            $entityManager->flush();
-//            return $this->redirectToRoute('booking_list');
+           $entityManager = $doctrine->getManager();
+           $entityManager->persist($booking);
+
+            $entityManager->flush();
+            return $this->redirectToRoute('booking_list');
         }
         return $this->render('room/new.html.twig',array(
             'form' => $form->createView()

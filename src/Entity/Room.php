@@ -75,6 +75,40 @@ class Room
     function canBook(User $user) {
         return ($this->getOnlyForPremiumMembers() && $user->getPremiumMember()) || !$this->getOnlyForPremiumMembers();
     }
+    public function reservedDates(ManagerRegistry $doctrine): array
+    {
+        $entityManager = $doctrine->getManager();
+        $room = $entityManager->getRepository(Room::class)->find($this->getId());
+
+        $bookings = $room->getBookings()->unwrap();
+        $reservedDates = [];
+
+        foreach ($bookings as &$value) {
+            $reservedDates[] = ['start' => $value->getStartDate(), 'end' => $value->getEndDate()];
+        }
+        return $reservedDates;
+    }
+
+    public function isAvailable(DateTime $startDate, DateTime $endDate, array $reservedDates): bool
+    {
+        $check = true;
+        foreach ($reservedDates as &$value) {
+            if ($startDate->getTimestamp() > $value['start']->getTimestamp() && $startDate->getTimestamp() < $value['end']->getTimestamp()) {
+                $check = false; // new start > old start AND new start < old end
+            } elseif ($endDate->getTimestamp() > $value['start']->getTimestamp() && $endDate->getTimestamp() < $value['end']->getTimestamp()) {
+                $check = false; // new end > old start AND new end < old end
+            } elseif ($startDate->getTimestamp() <= $value['start']->getTimestamp() && $endDate->getTimestamp() > $value['end']->getTimestamp()) {
+                $check = false; // new start < old start AND new end > old end
+            } elseif ($startDate->getTimestamp() > $value['start']->getTimestamp() && $endDate->getTimestamp() == $value['end']->getTimestamp()) {
+                $check = false; // new start > old start AND new end == old end
+            } elseif ($startDate->getTimestamp() == $value['start']->getTimestamp() && $endDate->getTimestamp() == $value['end']->getTimestamp())
+                $check = false; // if dates of the bookings exactly match
+        }
+        if ($startDate->getTimestamp() < $endDate->getTimestamp()) {
+            $check = false;
+        }
+        return $check;
+    }
 
 
 }
